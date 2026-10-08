@@ -1,0 +1,41 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  gap: var(--mantine-spacing-sm);
+}
+
+.calendar {
+  flex-grow: 1;
+  min-height: 0;
+}
+
+/* SchedulePage only: keep generated free slots visually neutral. */
+.calendar :global(.rbc-slot-event.rbc-slot-free) {
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  opacity: 1 !important;
+}
+
+/* SchedulePage only: hide inline HH:mm-HH:mm label for free slots. */
+.calendar :global(.rbc-slot-event.rbc-slot-free .rbc-event-label) {
+  display: none;
+}
+
+.findPane {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.drawerCloseButton:hover {
+  background-color: var(--mantine-color-blue-7) !important;
+}

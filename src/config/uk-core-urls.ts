@@ -1,0 +1,16 @@
+export const UK_CORE_EXTENSION_URLS = [
+  'https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-BirthSex',
+  'https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-ContactPreference',
+  'https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-ContactRank',
+  'https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-CopyCorrespondenceIndicator',
+  'https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-DeathNotificationStatus',
+  'https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-EthnicCategory',
+  'https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-NHSNumberUnavailableReason',
+  'https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-NHSNumberVerificationStatus',
+  'http://hl7.org/fhir/6.0/StructureDefinition/extension-Patient.fetalStatus',
+  'https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-ResidentialStatus',
+  'http://hl7.org/fhir/StructureDefinition/patient-birthPlace',
+  'http://hl7.org/fhir/StructureDefinition/patient-cadavericDonor',
+  'http://hl7.org/fhir/StructureDefinition/patient-interpreterRequired',
+  'http://hl7.org/fhir/StructureDefinition/patient-proficiency',
+];

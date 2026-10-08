@@ -1,0 +1,39 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  gap: var(--mantine-spacing-sm);
+}
+
+.calendar {
+  flex-grow: 1;
+  min-height: 0;
+  position: relative;
+  margin-right: 10px;
+}
+
+.practitionerPane {
+  flex-basis: 25%;
+  background-color: var(--mantine-color-gray-0);
+  padding: 10px;
+}
+
+/* Keep free slot labels hidden; blocked slots should show from-to time above "Blocked" text. */
+.calendar :global(.rbc-slot-event.rbc-slot-free .rbc-event-label) {
+  display: none;
+}
+
+.placeholder {
+  height: 100%;
+  background-color: var(--mantine-color-gray-0);
+  border-radius: var(--mantine-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

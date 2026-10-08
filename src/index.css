@@ -1,0 +1,156 @@
+/* ── Navbar colour palette — edit these to restyle the sidebar ────────────── */
+:root {
+  --navbar-bg: var(--mantine-color-blue-9); /* sidebar background          */
+  --navbar-link-color: var(--mantine-color-white); /* link text colour             */
+  --navbar-icon-color: var(--mantine-color-white); /* icon colour                  */
+  --navbar-hover-bg: var(--mantine-color-blue-8); /* hover background             */
+  --navbar-hover-color: var(--mantine-color-white); /* hover text colour            */
+  --navbar-active-bg: var(--mantine-color-blue-7); /* active/selected background  */
+  --navbar-active-color: var(--mantine-color-white); /* active/selected text colour */
+  --navbar-section-title: var(--mantine-color-blue-3); /* section header labels        */
+}
+
+.mantine-AppShell-navbar {
+  background-color: var(--navbar-bg);
+  color: var(--navbar-link-color);
+}
+
+/* ── Navbar link buttons ──────────────────────────────────────────────────── */
+
+.mantine-AppShell-navbar a {
+  color: var(--navbar-link-color);
+}
+
+.mantine-AppShell-navbar a svg {
+  color: var(--navbar-icon-color) !important;
+}
+
+.mantine-AppShell-navbar a:hover {
+  background-color: var(--navbar-hover-bg);
+  color: var(--navbar-hover-color);
+}
+
+.mantine-AppShell-navbar a[data-active] {
+  background-color: var(--navbar-active-bg);
+  color: var(--navbar-active-color);
+}
+
+/* Active link on hover — Medplum resets background to near-white; keep icon visible */
+.mantine-AppShell-navbar a[data-active]:hover svg {
+  color: var(--mantine-primary-color-light-color) !important;
+}
+
+.mantine-AppShell-navbar [class*='menuTitle'] {
+  color: var(--navbar-section-title);
+  opacity: 1;
+}
+
+/* Hide the hardcoded spotlight Search button in the navbar */
+.mantine-AppShell-navbar [aria-label='Search'] {
+  display: none;
+}
+
+/* User menu button (logged-in user name) and sidebar toggle button */
+.mantine-AppShell-navbar button {
+  color: var(--navbar-link-color);
+}
+
+/* Avatar initials circle in the user menu button */
+.mantine-AppShell-navbar button .mantine-Avatar-placeholder {
+  background-color: transparent;
+  color: var(--navbar-link-color);
+  border: 1px solid var(--navbar-link-color);
+}
+
+/* Divider above the login button — full width, no margin */
+.mantine-AppShell-navbar [role='separator'] {
+  margin-left: -6px !important;
+  margin-right: -6px !important;
+}
+
+.mantine-AppShell-navbar button:hover {
+  background-color: var(--navbar-hover-bg);
+  color: var(--navbar-hover-color);
+}
+
+.mantine-AppShell-navbar button svg {
+  color: var(--navbar-icon-color) !important;
+}
+
+/* Table row hover color across all pages */
+:root {
+  --table-highlight-on-hover-color: var(--mantine-color-blue-0);
+}
+
+/* Override --input-bd on the Mantine Input element inside an error wrapper (used for inputs that don't accept error prop, e.g. ReferenceInput) */
+.input-error-highlight .m_6c018570 {
+  --input-bd: var(--mantine-color-error) !important;
+}
+
+.mantine-ActionIcon-root:active {
+  transform: none;
+}
+
+/* Pill-style tabs used across Tasks, Messages, Labs, and Patient tabs */
+.pill-tabs .mantine-Tabs-list {
+  display: flex;
+  gap: 4px;
+}
+
+.pill-tabs .mantine-Tabs-tab {
+  height: 32px;
+  padding: 0 12px;
+  border-radius: var(--mantine-radius-xl);
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 450;
+  background-color: transparent;
+  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-gray-4));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.pill-tabs .mantine-Tabs-tab:hover {
+  background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-gray-8));
+}
+
+.pill-tabs .mantine-Tabs-tab[data-active] {
+  background-color: light-dark(var(--mantine-color-blue-1), var(--mantine-color-blue-5));
+  color: light-dark(var(--mantine-color-gray-9), var(--mantine-color-white));
+}
+
+.pill-tabs .mantine-Tabs-tab[data-active]:hover {
+  background-color: light-dark(var(--mantine-color-gray-1), var(--mantine-color-gray-7));
+  color: light-dark(var(--mantine-color-gray-9), var(--mantine-color-white));
+}
+
+/* Outline-style ActionIcon buttons (filter, delete, lock, etc.) */
+.mantine-ActionIcon-root.outline-icon-button {
+  border: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-gray-6));
+  transition: border-color 150ms ease;
+}
+
+.mantine-ActionIcon-root.outline-icon-button:hover,
+.mantine-ActionIcon-root.outline-icon-button[data-opened] {
+  border-color: light-dark(var(--mantine-color-gray-5), var(--mantine-color-gray-5));
+}
+
+.mantine-ActionIcon-root.outline-icon-button svg {
+  color: var(--mantine-color-gray-6);
+}
+
+/* Menu item styles */
+.mantine-Menu-item {
+  border-radius: var(--mantine-radius-sm);
+}
+
+.mantine-Menu-item:hover {
+  background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-gray-8));
+}
+
+.filter-submenu-dropdown {
+  min-width: 200px;
+}

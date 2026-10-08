@@ -1,0 +1,15 @@
+{
+  "name": "ods-proxy-api",
+  "version": "1.0.0",
+  "description": "ODS API proxy for Azure Static Web Apps",
+  "main": "src/functions/*.js",
+  "scripts": {
+    "start": "func start"
+  },
+  "dependencies": {
+    "@azure/functions": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

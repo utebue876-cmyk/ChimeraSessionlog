@@ -1,0 +1,127 @@
+.rbc-calendar {
+  font-family:
+    -apple-system, 'system-ui', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+}
+
+/* Outlook-style blue outline on the current day column.
+   Three .rbc-today elements stack vertically: header cell → allday row → time column.
+   ::after pseudo-elements render above child borders so lines are unbroken. */
+.rbc-header.rbc-today,
+.rbc-day-bg.rbc-today,
+.rbc-day-slot.rbc-today {
+  position: relative;
+}
+
+.rbc-header.rbc-today::after,
+.rbc-day-bg.rbc-today::after,
+.rbc-day-slot.rbc-today::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-left: 1px solid #228be6;
+  border-right: 1px solid #228be6;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.rbc-header.rbc-today::after {
+  border-top: 1px solid #228be6;
+}
+
+.rbc-day-slot.rbc-today::after {
+  border-bottom: 1px solid #228be6;
+}
+
+/* Hide the all-day row in week and day views.
+   Two-class specificity (0-2-0) matches the library's .rbc-time-view .rbc-allday-cell
+   rule so our display:none wins via cascade order (app styles load after library). */
+.rbc-time-view .rbc-allday-cell {
+  display: none;
+}
+
+/* Remove the 2px border-top on the time grid that appears as a leftover line
+   beneath the day headers now that the all-day row is hidden. The 1px
+   border-bottom on each .rbc-header cell provides a sufficient separator. */
+.rbc-time-view .rbc-time-content {
+  border-top: none;
+}
+
+/* Gray background on past-date header cells only (not the full day column). */
+.rbc-header.past-date {
+  background-color: var(--mantine-color-gray-0);
+}
+
+/* Hide RBC's generated "00:00 – 23:59" time label for all-day blocked slots;
+   the event content renders "All Day" text instead. */
+.rbc-blocked-allday .rbc-event-label {
+  display: none;
+}
+
+/* Fix: .rbc-time-header-content has border-left: 1px which shifts all its flex
+   children (day-name headers and all-day cells) 1px to the right of the time-grid
+   columns below, misaligning the today blue outline in those rows. Replacing the
+   border with an inset box-shadow keeps the visual identical but has no layout
+   impact, so the columns align correctly.
+   Note: two-class specificity (0-2-0) beats the library's single-class rule
+   (0-1-0) regardless of CSS load order. */
+.rbc-time-view .rbc-time-header-content {
+  border-left-width: 0;
+  box-shadow: inset 1px 0 0 #ddd;
+}
+
+/* Chrome-specific fix: in Chrome the today ::after is rendered 1px too narrow
+   on each side in the header and all-day rows. Extend the pseudo-element 1px in
+   each direction to compensate. overflow: visible is required on the header cell
+   so the ::after isn't clipped by its own overflow: hidden. */
+.is-chrome .rbc-header.rbc-today {
+  overflow: visible;
+}
+.is-chrome .rbc-header.rbc-today::after,
+.is-chrome .rbc-day-bg.rbc-today::after {
+  left: -1px;
+  right: -1px;
+}
+
+/* Day schedule: suppress the per-column today outline entirely. */
+.day-schedule-calendar .rbc-header.rbc-today::after,
+.day-schedule-calendar .rbc-day-bg.rbc-today::after,
+.day-schedule-calendar .rbc-day-slot.rbc-today::after {
+  display: none;
+}
+
+.rbc-btn-group button {
+  font-size: 14px;
+}
+
+/* The .rbc-events-container sits position:absolute over the entire day column.
+   Scoped to .chimera-calendar (SchedulePage) only — CalendarSchedule keeps its
+   original pointer-events behaviour.
+   Setting pointer-events:none lets the mouse reach the .rbc-time-slot cells
+   beneath it, so cursor/click styles from slotPropGetter are visible.
+   Individual events keep pointer-events:auto so they remain interactive. */
+.chimera-calendar .rbc-day-slot .rbc-events-container {
+  pointer-events: none;
+}
+.chimera-calendar .rbc-day-slot .rbc-events-container .rbc-event,
+.chimera-calendar .rbc-day-slot .rbc-events-container .rbc-background-event {
+  pointer-events: auto;
+}
+
+/* Pull the RBC time-range label (shown in short/30-min slots) up slightly. */
+.rbc-day-slot .rbc-event-label {
+  margin-top: -2px;
+}
+
+/* Pending block drafts (timed + all-day) are rendered as background events.
+   Force full-width rendering and explicit red dashed styling so they remain
+   visible even when overlapping other slot background events. */
+.chimera-calendar .rbc-background-event.rbc-pending-block {
+  background: rgba(250, 82, 82, 0.12) !important;
+  border: 2px dashed rgba(250, 82, 82, 0.65) !important;
+  border-radius: 2px;
+  box-sizing: border-box;
+  left: 2px !important;
+  width: calc(100% - 4px) !important;
+  z-index: 5;
+  pointer-events: none;
+}

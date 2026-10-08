@@ -1,0 +1,81 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 288px;
+  gap: 16px;
+  align-items: start;
+}
+
+.mainColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sectionLabel {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--mantine-color-gray-6);
+  margin-bottom: 8px;
+}
+
+.appointmentDate {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--mantine-color-dark-7);
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--mantine-color-gray-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--mantine-color-dark-6);
+  flex-shrink: 0;
+}
+
+.taskNumber {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--mantine-color-gray-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 12px;
+  color: black;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.pdfBadge {
+  background-color: var(--mantine-color-red-7);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 5px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  margin-top: 3px;
+  letter-spacing: 0.04em;
+}
+
+.emptyText {
+  color: var(--mantine-color-gray-5);
+  font-size: 14px;
+  padding: 8px 0;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

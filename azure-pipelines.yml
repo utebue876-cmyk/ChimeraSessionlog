@@ -1,0 +1,73 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  # Pinned rather than 'ubuntu-latest' to avoid the Oct 2026 automatic migration to Ubuntu 26 (actions/runner-images#14748).
+  vmImage: ubuntu-24.04
+
+variables:
+  NODE_VERSION: '22.x'
+
+stages:
+  - stage: Build
+    displayName: Build
+    jobs:
+      - job: Build
+        displayName: Install and Build
+        steps:
+          - task: UseNode@1
+            displayName: Use Node.js $(NODE_VERSION)
+            inputs:
+              version: $(NODE_VERSION)
+
+          - task: Cache@2
+            displayName: Cache node_modules
+            inputs:
+              key: 'npm | "$(Agent.OS)" | package-lock.json'
+              restoreKeys: |
+                npm | "$(Agent.OS)"
+              path: node_modules
+
+          - script: npm ci
+            displayName: Install dependencies
+            condition: ne(variables['CacheRestored'], 'true')
+
+          - script: npm run build
+            displayName: Build app
+
+          - task: PublishPipelineArtifact@1
+            displayName: Publish build artifact
+            inputs:
+              targetPath: dist
+              artifact: drop
+
+  - stage: Deploy
+    displayName: Deploy to Azure Static Web Apps
+    dependsOn: Build
+    condition: succeeded()
+    jobs:
+      - deployment: DeployStaticWebApp
+        displayName: Deploy
+        environment: production
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+
+                - task: DownloadPipelineArtifact@2
+                  displayName: Download build artifact
+                  inputs:
+                    artifact: drop
+                    path: $(System.DefaultWorkingDirectory)/drop
+
+                - task: AzureStaticWebApp@0
+                  displayName: Deploy to Azure Static Web Apps
+                  inputs:
+                    app_location: drop
+                    api_location: api
+                    skip_app_build: true
+                  env:
+                    azure_static_web_apps_api_token: $(AZURE_STATIC_WEB_APPS_API_TOKEN)
